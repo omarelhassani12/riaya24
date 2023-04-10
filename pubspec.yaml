@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_font_icons: ^2.2.5
+  get: ^4.6.5
   url_launcher: ^6.1.10
 
 dev_dependencies:
