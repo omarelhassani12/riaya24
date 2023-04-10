@@ -10,7 +10,18 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key});
 
   final Uri phoneNumber = Uri.parse('tel:+212633959676');
-  final Uri whatsApp = Uri.parse('https://wa.me/212633959676');
+
+  void _openWhatsAppChat() async {
+    String whatsAppNumber = "0633959676";
+    var url = "https://wa.me/$whatsAppNumber?text=Hello World";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Error: Could not launch');
+      throw 'Error occured';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -144,24 +155,22 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () async {
-                        launchUrl(whatsApp);
-                      },
                       child: IconButton(
-                        icon: Icon(FontAwesome.whatsapp,
+                        icon: const Icon(FontAwesome.whatsapp,
                             size: 40, color: Color(0xFF0A4273)),
-                        onPressed: () {},
+                        onPressed: () {
+                          _openWhatsAppChat();
+                        },
                       ),
                     ),
                     const SizedBox(width: 32),
                     GestureDetector(
-                      onTap: () async {
-                        print(canLaunchUrl(phoneNumber));
-                      },
                       child: IconButton(
-                        icon: const Icon(Icons.phone,
+                        icon: Icon(Icons.phone,
                             size: 40, color: Color(0xFF0A4273)),
-                        onPressed: () {},
+                        onPressed: () {
+                          launchUrl(phoneNumber);
+                        },
                       ),
                     ),
                   ],
