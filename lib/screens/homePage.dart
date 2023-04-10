@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:riaya24/screens/auth/registerPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:riaya24/screens/accountPage.dart';
 import 'package:riaya24/screens/the3pages/clinic.dart';
@@ -48,7 +49,56 @@ class HomePage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Do something when the second icon is tapped
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  'تسجيل الدخول',
+                                  style: TextStyle(
+                                    // color: Color(0xFF0A4273),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'سجل دخولك الان للاستمتاع بهذه الخاصية وكافة مميزات تطبيق رعاية24',
+                                  style: TextStyle(
+                                    color: Color(0xFF0A4273),
+                                    fontSize: 16,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 16),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const RegisterPage()),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF66BB6A),
+                                  ),
+                                  child: const Text('تسجيل'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                   child: const Column(
                     children: [
@@ -66,7 +116,8 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EmergencyPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const EmergencyPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -122,7 +173,7 @@ class HomePage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green[400],
+                backgroundColor: const Color(0xFF66BB6A),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -166,7 +217,7 @@ class HomePage extends StatelessWidget {
                     const SizedBox(width: 32),
                     GestureDetector(
                       child: IconButton(
-                        icon: Icon(Icons.phone,
+                        icon: const Icon(Icons.phone,
                             size: 40, color: Color(0xFF0A4273)),
                         onPressed: () {
                           launchUrl(phoneNumber);
